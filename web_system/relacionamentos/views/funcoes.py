@@ -26,3 +26,24 @@ def nome(request, nome):
     objeto = serializers.serialize('python', reporter)
     return JsonResponse(objeto, safe=False)
     #return HttpResponse(reporter, status=200)
+
+def exercicio(request, nome):
+    nome_original = nome
+    nome_cripto = ""
+    tabela = {
+        "a": "4",
+        "e": "3",
+        "i": "1",
+        "o": "0",
+        "u": "v",
+    }
+    nome_cripto = "".join(tabela.get(l.lower(), l) for l in nome)
+    return HttpResponse(f"{nome_original} - {nome_cripto}")
+
+def calculo(request,x,y):
+    operacoes =  {"soma":x+y,
+                  "subtracao":x-y,
+                  "multiplicacao":x*y,
+                  "divisao":x/y if y != 0 else "Erro, divisao por 0",}
+    return JsonResponse(operacoes)
+    
