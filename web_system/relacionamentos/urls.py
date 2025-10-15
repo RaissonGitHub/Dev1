@@ -2,6 +2,7 @@ from django.urls import path
 from relacionamentos.views.funcoes import primeira_view, saudacao, calculo, exercicio, nome
 from relacionamentos.views import PrimeiraView, NomeView
 
+
 app_name = 'relacionamentos'
 
 urlpatterns = [

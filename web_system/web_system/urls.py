@@ -5,6 +5,6 @@ from web_system.views import estaticas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('relacionamentos/', include('relacionamentos.urls')),
+    path('relacionamentos/', include('relacionamentos.urls', namespace="relacionamentos")),
     path('', estaticas.index, name="index")
 ]
