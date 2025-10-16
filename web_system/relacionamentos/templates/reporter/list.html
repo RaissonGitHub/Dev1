@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if exemplos %}
+    <h1>Lista de Reporters</h1>
+    {% else %}
+    <h1>Nenhum Reporter encontrado</h1>
+    {% endif %}
+    {% endblock title %}
+{% block content %}
+    {% if exemplos %}   
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">CPF</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for exemplo in exemplos %}
+            <tr>
+                <th scope="row">{{ exemplo.id }}</th>
+                <td>{{exemplo.name}}</td>
+                <td>{{exemplo.email}}</td>
+                <td>{{exemplo.cpf}}</td>
+                <td>
+                    <div>
+                        Botoes aqui
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+
+{% endblock content %}
+
