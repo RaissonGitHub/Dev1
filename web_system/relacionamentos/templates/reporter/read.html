@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>{{reporter.name}}</h1>
+{% endblock title %}
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <strong>Código:</strong>
+            <p>{{reporter.id}}</p>
+            <strong>Nome:</strong>
+            <p>{{reporter.name}}</p>
+        </div>
+    </div>
+    <a class='btn btn-primary bi-arrow-left' href="{% url 'relacionamentos:reporter' %}"> Voltar</a>
+{% endblock content %}
+

@@ -1,7 +1,7 @@
 from django.urls import path
 from relacionamentos.views.funcoes import primeira_view, saudacao, calculo, exercicio, nome
 from relacionamentos.views import PrimeiraView, NomeView, SaudacaoView
-from relacionamentos.views.reporter import exemplo_list 
+from relacionamentos.views.reporter import reporter_list, reporter_detail, reporter_delete 
 
 app_name = 'relacionamentos'
 
@@ -23,8 +23,12 @@ urlpatterns = [
     # nome é a variavel que vai armazenar o que vem depois de funcao/
     path('funcao/<str:nome>', nome,
          name="nome"),
-         
-    path('reporter/function/', exemplo_list, name="reporter"), 
+
+    path('reporter/function/read/<int:pk>', reporter_detail, name="reporter_read"), 
+    
+    path('reporter/function/delete/<int:pk>', reporter_delete, name="reporter_delete"), 
+
+    path('reporter/function/', reporter_list, name="reporter"), 
 
     path('classe/teste', PrimeiraView.as_view(), name="primeira_view_class"),
     

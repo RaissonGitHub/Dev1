@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {% if exemplos %}
+    {% if reporters %}
     <h1>Lista de Reporters</h1>
     {% else %}
     <h1>Nenhum Reporter encontrado</h1>
     {% endif %}
     {% endblock title %}
 {% block content %}
-    {% if exemplos %}   
+    {% if reporters %}   
     <table class="table">
         <thead>
           <tr>
@@ -16,18 +16,26 @@
             <th scope="col">Nome</th>
             <th scope="col">Email</th>
             <th scope="col">CPF</th>
+            <th scope="col">Funções</th>
+            
           </tr>
         </thead>
         <tbody>
-            {% for exemplo in exemplos %}
+            {% for reporter in reporters %}
             <tr>
-                <th scope="row">{{ exemplo.id }}</th>
-                <td>{{exemplo.name}}</td>
-                <td>{{exemplo.email}}</td>
-                <td>{{exemplo.cpf}}</td>
+                <th scope="row">{{ reporter.id }}</th>
+                <td>{{reporter.name}}</td>
+                <td>{{reporter.email}}</td>
+                <td>{{reporter.cpf}}</td>
                 <td>
                     <div>
-                        Botoes aqui
+                    <a class="btn btn-outline-secondary btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href="{% url 'relacionamentos:reporter_read' reporter.id %}"><i class="bi bi-card-list"></i></a>
+                    <a class="btn btn-outline-danger btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href="{% url 'relacionamentos:reporter_delete' reporter.id %}"><i class="bi bi-trash"></i></a>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                    
                     </div>
                 </td>
             </tr>
