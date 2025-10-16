@@ -1,6 +1,6 @@
 from django.urls import path
 from relacionamentos.views.funcoes import primeira_view, saudacao, calculo, exercicio, nome
-from relacionamentos.views import PrimeiraView, NomeView
+from relacionamentos.views import PrimeiraView, NomeView, SaudacaoView
 
 
 app_name = 'relacionamentos'
@@ -25,6 +25,9 @@ urlpatterns = [
          name="nome"),
 
     path('classe/teste', PrimeiraView.as_view(), name="primeira_view_class"),
+    
+    path('classe/saudacao', SaudacaoView.as_view(), name="saudacao_view_class"),
 
-    path('classe/<str:nome>', NomeView.as_view(), name="nome_view_class" )
+    path('classe/<str:nome>', NomeView.as_view(), name="nome_view_class" ),
+
 ]
