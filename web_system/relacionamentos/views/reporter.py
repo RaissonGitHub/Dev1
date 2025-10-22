@@ -1,3 +1,5 @@
+import random
+import string
 from relacionamentos.models.reporter import Reporter
 from django.shortcuts import get_object_or_404, render, redirect
 
@@ -22,8 +24,20 @@ def reporter_delete(request,pk):
                 return redirect('relacionamentos:reporter')
         else:
             context ={'reporter': reporter}
-    except:
+    except Exception as e:
+        print(e)
         context = {}
         return render(request, "reporter/list.html", context) 
 
     return render(request, "reporter/delete.html", context)
+
+def generate_code(request, reporter_id):
+    reporter = get_object_or_404(Reporter, pk=reporter_id)
+    try:
+        letters = string.ascii_letters +string.digits
+        reporter.cod = "".join(random.choice(letters) for i in range(10))
+        reporter.save()
+        return redirect('relacionamentos:reporter')
+    except:
+        print(f"Erro ao gerar código para reporter {reporter}")
+        return redirect('relacionamentos:reporter')
