@@ -1,7 +1,7 @@
 from django.urls import path
 from relacionamentos.views.funcoes import primeira_view, saudacao, calculo, exercicio, nome
 from relacionamentos.views import PrimeiraView, NomeView, SaudacaoView
-from relacionamentos.views.reporter import reporter_list, reporter_detail, reporter_delete, reporter_code, reporter_create
+from relacionamentos.views.reporter import reporter_list, reporter_detail, reporter_delete, reporter_code, reporter_create, reporter_update
 
 app_name = 'relacionamentos'
 
@@ -29,6 +29,8 @@ urlpatterns = [
     path('reporter/function/create', reporter_create, name="reporter_create"),
     
     path('reporter/function/delete/<int:pk>', reporter_delete, name="reporter_delete"), 
+
+    path('reporter/function/update/<int:reporter_id>', reporter_update, name="reporter_update" ),
 
     path("reporter/function/gerar_codigo/<int:reporter_id>", reporter_code, name="reporter_generate_code"),
 

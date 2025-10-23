@@ -56,3 +56,17 @@ def reporter_code(request, reporter_id):
         print(f"Erro ao gerar código para reporter {reporter}")
         return redirect('relacionamentos:reporter')
     
+def reporter_update(request, reporter_id):
+    reporter = get_object_or_404(Reporter, pk=reporter_id)
+    if request.method == "POST":
+        form = ReporterForm(request.POST, instance=reporter)
+        if form.is_valid():
+            form.save()
+            return redirect('relacionamentos:reporter')
+    else:
+        form = ReporterForm(instance=reporter)
+    context = {
+        'form': form,
+        'reporter': reporter,
+    }
+    return render(request, 'reporter/update.html', context)

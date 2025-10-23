@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
- <h1>Criar Reporter</h1>
+ <h1>Atualizar Reporter</h1>
 {% endblock title %}
 
 {% block content %}
-   <form action="{% url "relacionamentos:reporter_create" %}" id="reporter" method="post">
+   <form action="{% url "relacionamentos:reporter_update" reporter.id %}" id="reporter" method="post">
     {% csrf_token %}
-    <!--{{form.as_div}} -->
     {% for field in form %}
       <div class="mb-3 text-start">
          {{ field.label_tag }} {{ field }}
