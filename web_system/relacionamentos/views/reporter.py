@@ -2,6 +2,7 @@ import random
 import string
 from relacionamentos.models.reporter import Reporter
 from django.shortcuts import get_object_or_404, render, redirect
+from relacionamentos.forms.reporter import ReporterForm
 
 
 def reporter_list(request):
@@ -13,6 +14,19 @@ def reporter_detail(request,pk):
     reporter = Reporter.objects.get(id=pk)
     context = {"reporter":reporter}
     return render(request, "reporter/read.html", context)
+
+def reporter_create(request):
+    if request.method == "POST":
+        form = ReporterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('relacionamentos:reporter')
+    else:
+        form = ReporterForm()
+    context = {
+        'form':form
+    }
+    return render(request, 'reporter/create.html', context)
 
 def reporter_delete(request,pk):    
     reporter = get_object_or_404(Reporter, pk=pk)
@@ -31,7 +45,7 @@ def reporter_delete(request,pk):
 
     return render(request, "reporter/delete.html", context)
 
-def generate_code(request, reporter_id):
+def reporter_code(request, reporter_id):
     reporter = get_object_or_404(Reporter, pk=reporter_id)
     try:
         letters = string.ascii_letters +string.digits
@@ -41,3 +55,4 @@ def generate_code(request, reporter_id):
     except:
         print(f"Erro ao gerar código para reporter {reporter}")
         return redirect('relacionamentos:reporter')
+    

@@ -16,7 +16,13 @@ class Reporter(Base):
                               verbose_name=_("Email"),
                               help_text=_("Digite o email do reporter"))
     
+    cod = models.CharField(max_length=100,
+                           verbose_name=_("Código"),
+                           help_text=_("Informe um codigo aleatorio"),
+                           default="")
+    
     cpf = models.CharField(max_length=11, 
+                           verbose_name=_("CPF"),
                            help_text='Digite o CPF do reporter',
                            validators=[MaxLengthValidator(11), valida_cpf],
                            unique=True)
