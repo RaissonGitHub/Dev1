@@ -12,7 +12,7 @@
         <a href="{% url "relacionamentos:reporter_create" %}" class="btn btn-primary" role="button" title="Criar com Funções" >
             <i class="bi bi-plus-square"></i> Criar com Funções
         </a>
-        <a href="#" class="btn btn-info" role="button" title="Criar com Funções">
+        <a href="{% url "relacionamentos:reporter_view_create" %}" class="btn btn-info" role="button" title="Criar com Funções">
             <i class="bi bi-plus-square"></i> Criar com Classes
         </a>
     </div>
@@ -26,6 +26,7 @@
             <th scope="col">Email</th>
             <th scope="col">CPF</th>
             <th scope="col">Funções</th>
+            <th scope="col">Classes</th>
             
           </tr>
         </thead>
@@ -47,7 +48,11 @@
                 </td>
                 <td>
                     <div>
-                    
+                        <a class="btn btn-outline-primary btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href="{% url 'relacionamentos:reporter_view_read' reporter.id %}"><i class="bi bi-card-list"></i></a>
+                        <a class="btn btn-outline-success btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar" href=""><i class="bi  bi-pencil"></i></a>
+                        <a class="btn btn-outline-warning btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar código" href=""><i class="bi bi-repeat"></i></a>
+                        <a class="btn btn-outline-danger btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href=""><i class="bi bi-trash"></i></a>
+                        
                     </div>
                 </td>
             </tr>
