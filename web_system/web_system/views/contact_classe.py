@@ -1,17 +1,28 @@
 from django.shortcuts import render
-from django.views import  View
+from django.views import View
 from web_system.forms import ContactForm
 
-def contact(request):
-    if request.method == 'POST':
+
+class ContactView(View):
+    @staticmethod
+    def get(request):
+        form = ContactForm()
+        context = {
+            'form': form,
+            'url_form': 'class_contact',
+        }
+        return render(request, 'contact/page_contact.html', context)
+    
+    @staticmethod
+    def post(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             subject = form.cleaned_data.get("subject")
             message = form.cleaned_data.get("message")
             sender = form.cleaned_data.get("sender")
             cc_myself = form.cleaned_data.get("cc_myself")
-
-            recipients = ["2024010481@aluno.restinga.ifrs.edu.br"]
+            print("Subject:", subject)
+            recipients = ['2024010481@aluno.restinga.ifrs.edu.br']
             if cc_myself:
                 recipients.append(sender)
             # chamada para eviar e-mail
@@ -21,16 +32,3 @@ def contact(request):
                 'form': form,
             }
             return render(request, 'contact/thanks.html', context)
-    
-        context = {'form':form,
-                'url_form': 'function_contact',
-        }
-
-        return render(request, 'contact/page_contact.html', context)
-    elif request.method == 'GET':
-        form = ContactForm()
-        context = {
-            'form': form,
-            'url_form': 'function_contact'
-        }
-        return render(request, 'contact/page_contact.html', context)
