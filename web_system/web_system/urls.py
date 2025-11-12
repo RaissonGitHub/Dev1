@@ -13,6 +13,6 @@ urlpatterns = [
     path('funcao/contato/', views.contact, name="function_contact"),
     #path('funcao/search/', views.buscar, name="search_function"),
     path('class/contato/', views.ContactView.as_view(), name="class_contact"),
-    path('accounts/login', auth_views.LoginView.as_view(template_name="accounts/login.html", authentication_form=CustomLoginForm)),
+    path('accounts/login/', auth_views.LoginView.as_view(template_name="accounts/login.html", authentication_form=CustomLoginForm)),
     path('accounts/', include('django.contrib.auth.urls')),
 ]

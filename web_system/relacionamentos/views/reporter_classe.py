@@ -5,6 +5,7 @@ from relacionamentos.forms.reporter import ReporterForm
 import random
 import string
 
+
 class ReporterListView(View):
     @staticmethod
     def get(request):
