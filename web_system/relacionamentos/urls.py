@@ -2,6 +2,8 @@ from django.urls import path
 from relacionamentos.views.funcoes import primeira_view, saudacao, calculo, exercicio, nome
 from relacionamentos.views import PrimeiraView, NomeView, SaudacaoView, ReporterListView, ReporterDetailView, ReporterCreateView, ReporterGenerateCode, ReporterUpdateView, ReporterDeletelView
 from relacionamentos.views.reporter import reporter_list, reporter_detail, reporter_delete, reporter_code, reporter_create, reporter_update
+from relacionamentos.views.reporter_generic import ReporterListViewGeneric, ReporterDetailsViewGeneric, \
+    ReporterDeleteViewGeneric, ReporterCreateViewGeneric, ReporterUpdateViewGeneric
 
 app_name = 'relacionamentos'
 
@@ -23,6 +25,12 @@ urlpatterns = [
     # nome é a variavel que vai armazenar o que vem depois de funcao/
     path('funcao/<str:nome>', nome,
          name="nome"),
+     # rotas do reporter com generic
+    path('reporter/generic/update/<int:pk>', ReporterUpdateViewGeneric.as_view(), name='reporter_update_generic'),
+    path('reporter/generic/create/', ReporterCreateViewGeneric.as_view(), name='reporter_create_generic'),
+    path('reporter/generic/delete/<int:pk>', ReporterDeleteViewGeneric.as_view(), name='reporter_delete_generic'),
+    path('reporter/generic/details/<int:pk>', ReporterDetailsViewGeneric.as_view(), name='reporter_details_generic'),
+    path('reporter/generic/', ReporterListViewGeneric.as_view(), name='reporter_list_generic'),
 
     path('reporter/function/read/<int:pk>', reporter_detail, name="reporter_read"), 
     
