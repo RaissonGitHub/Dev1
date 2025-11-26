@@ -29,5 +29,13 @@ class Reporter(Base):
 
     objects = ReporterManager()
 
+    # Adicionar uma Permissao personalizada
+
+    class Meta:
+        # Permissoes devem seguir -> permissao_model
+        permissions = [
+            ("generate_code_reporter", "Pode gerar codigo para reporter"),
+        ]
+
     def __str__(self):
         return f"{self.name} - {self.cpf}"

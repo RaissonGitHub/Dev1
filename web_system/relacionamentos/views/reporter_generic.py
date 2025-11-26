@@ -9,7 +9,8 @@ class ReporterListViewGeneric(ListView):
     model = Reporter # código do professor
     template_name = "reporter/list.html" # código do professor
     context_object_name = 'lista' # código do professor
-    queryset = Reporter.objects.find_by_name('F') # código do professor não entendi
+    # Avoid querying the database at import time; set an empty queryset by default
+    queryset = Reporter.objects.none()
 
 
     def get_queryset(self):

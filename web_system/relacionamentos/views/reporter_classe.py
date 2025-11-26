@@ -1,4 +1,5 @@
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
 from relacionamentos.models.reporter import Reporter
 from relacionamentos.forms.reporter import ReporterForm
@@ -41,7 +42,9 @@ class ReporterCreateView(View):
         return render(request, 'reporter_classe/create.html', context)
 
 
-class ReporterGenerateCode(View):
+class ReporterGenerateCode(LoginRequiredMixin,  PermissionRequiredMixin, View ):
+    login_url = 'accounts:login'
+    permission_required = 'relacionamentos.generate_code_reporter'
     @staticmethod
     def get(request, pk):
         reporter = get_object_or_404(Reporter, pk=pk)

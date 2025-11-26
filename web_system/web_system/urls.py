@@ -4,6 +4,7 @@ from django.conf.urls import include
 from web_system import views
 from django.contrib.auth import views as auth_views
 from web_system.forms import CustomLoginForm
+from web_system.views.profile import ProfileView
 
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('class/contato/', views.ContactView.as_view(), name="class_contact"),
     path('accounts/login/', auth_views.LoginView.as_view(template_name="accounts/login.html", authentication_form=CustomLoginForm)),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/profile/', ProfileView.as_view(), name='profile'),
 ]

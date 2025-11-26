@@ -40,6 +40,20 @@
           </ul>
         </li>
       </ul>
+      {% if user.is_authenticated %}
+        <span class="navbar-text text-white px-2">
+          <a href="{% url "profile" %}" class="nav-link">
+            <i class="bi bi-person-fill"></i> {{ user.first_name }}
+          </a>
+        </span>
+        <div class="me-2"></div>
+        <form action="{% url "logout" %}" method="post">
+          {% csrf_token %}
+          <button class="btn btn-outline-danger" role="button" type="submit"><i class="bi bi-box-arrow-in-left"></i></button>
+        </form>
+      {% else %}
+        <a href="{% url "login" %}" role="button" class="btn btn-outline-primary"><i class="bi bi-box-arrow-in-right"></i></a>
+      {% endif %}
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Search</button>
