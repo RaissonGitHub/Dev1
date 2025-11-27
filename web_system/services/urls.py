@@ -11,4 +11,6 @@ urlpatterns = [
     path('', api_root, name="api-root"),
     path('saudacao', saudacao, name="saudacao"),
     path('saudacao/classe', ExemploSaudacao.as_view(), name="saudacao_classe"),
+    path('calculo',calculo, name="calculo"),
+
 ]
