@@ -1,56 +1,53 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
-
-from relacionamentos.models import Reporter
-from relacionamentos.forms import ReporterForm
-
-
-class ReporterListViewGeneric(ListView):
-    model = Reporter # código do professor
-    template_name = "reporter/list.html" # código do professor
-    context_object_name = 'lista' # código do professor
-    # Avoid querying the database at import time; set an empty queryset by default
-    queryset = Reporter.objects.none()
+from django.views.generic import UpdateView, CreateView, DeleteView, ListView, DetailView
+from relacionamentos.models.reporter import Reporter
+from relacionamentos.forms.reporter import ReporterForm
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
+class ReporterGenericListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
+    model = Reporter
+    template_name = "reporter/list.html"
+    permission_required = "relacionamentos.view_reporter"
+    # Nome que é passado para o template Ex: usado no for
+    context_object_name = "reporters"
+    # A consulta normal seria Classe.objects.all()
+    # Se quiser usar uma consulta nao tao generica
+    queryset = Reporter.objects.find_by_name("Joao")
+
+    # Outra implementação do queryset (vai sobrescrever a variavel se os dois existirem)
     def get_queryset(self):
-        objects = Reporter.objects.all()
-        #objects = Reporter.objects.find_by_name('Fer')# código do professor
-        #other_objects = Perfil.objects.find_by_passaporte('111')# código do professor
-        #objects = objects.union(other_objects)# código do professor não consigo fazer o union funcionar perguntar sobre o order_by do html
+        objetos = Reporter.objects.find_by_name("Joao")
+        outros_objetos = Reporter.objects.find_by_name("Pedro")
+        objetos = objetos.union(outros_objetos)
+        return objetos
 
-        return objects
+class ReporterGenericDetailView(DetailView):
+    model = Reporter
+    fields = "__all__"
+    template_name = "reporter/read.html"
+    # url para voltar
+    success_url = reverse_lazy("relacionamentos:reporter_generic_class_list")
 
+class ReporterGenericDeleteView(LoginRequiredMixin, PermissionRequiredMixin,DeleteView):
+    permission_required = "relacionamentos.delete_reporter"
+    model = Reporter
+    fields = "__all__"
+    template_name = "reporter/delete.html"
+    # url para voltar
+    success_url = reverse_lazy("relacionamentos:reporter_generic_class_list")
 
-class ReporterDetailsViewGeneric(DetailView):
-    model = Reporter # código do professor
-    # fields = '__all__' # código do professor
-    template_name='reporter/read.html' # código do professor
-    # sucess_url = reverse_lazy('relacionamentos:reporter_list_generic') # código do professor
-    context_object_name = 'objeto_reporter'
+class ReporterGenericCreateView(CreateView):
+    model = Reporter
+    form_class = ReporterForm
+    template_name = "reporter/create.html"
+    # url para voltar
+    success_url = reverse_lazy("relacionamentos:reporter_generic_class_list")
 
-
-class ReporterDeleteViewGeneric(DeleteView):
-    model = Reporter # código do professor
-    # fields = '__all__' # código do professor
-    template_name = 'reporter/delete.html' # código do professor
-    success_url = reverse_lazy('relacionamentos:reporter_list_generic') # código do professor
-    context_object_name = 'objeto_reporter'
-
-
-class ReporterCreateViewGeneric(CreateView):
-    model = Reporter # código do professor
-    form_class = ReporterForm # código do professor
-    template_name = 'reporter/create.html' # código do professor
-    success_url = reverse_lazy('relacionamentos:reporter_list_generic') # código do professor
-
-
-class  ReporterUpdateViewGeneric(UpdateView):
-    model = Reporter # código do professor
-    # fields = '__all__' # código do professor
-    form_class = ReporterForm # código do professor
-    template_name = 'reporter/update.html' # código do professor
-    success_url = reverse_lazy('relacionamentos:reporter_list_generic') # código do professor
-
-    context_object_name = 'objeto_reporter'
+class ReporterGenericUpdateView(UpdateView):
+    model = Reporter
+    form_class = ReporterForm
+    template_name = "reporter/update.html"
+    # url para voltar
+    success_url = reverse_lazy("relacionamentos:reporter_generic_class_list")
 
