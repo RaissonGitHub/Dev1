@@ -1,6 +1,6 @@
 from django.http import HttpResponse, JsonResponse
 from django.views import View
-from relacionamentos.models import Reporter
+from ..models import Reporter
 from django.core import serializers
 
 

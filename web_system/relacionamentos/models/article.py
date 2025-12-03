@@ -3,7 +3,7 @@ from .base import Base
 from django.utils.translation import gettext_lazy as _
 from .reporter import Reporter
 from .magazine import Magazine
-from relacionamentos.validators.coreia import tem_coreia
+from ..validators.coreia import tem_coreia
 
 
 class Article(Base): 

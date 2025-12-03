@@ -2,8 +2,8 @@ from django.db import models
 from .base import Base
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MaxLengthValidator
-from relacionamentos.validators.validar_cpf import valida_cpf
-from relacionamentos.managers.reporter_manager import ReporterManager
+from ..validators.validar_cpf import valida_cpf
+from ..managers.reporter_manager import ReporterManager
 
 
 class Reporter(Base): 

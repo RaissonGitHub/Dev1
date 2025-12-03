@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, CreateView, DeleteView, ListView, DetailView
-from relacionamentos.models.reporter import Reporter
-from relacionamentos.forms.reporter import ReporterForm
+from ..models.reporter import Reporter
+from ..forms.reporter import ReporterForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
@@ -13,9 +13,9 @@ class ReporterGenericListView(LoginRequiredMixin, PermissionRequiredMixin, ListV
     context_object_name = "reporters"
     # A consulta normal seria Classe.objects.all()
     # Se quiser usar uma consulta nao tao generica
-    queryset = Reporter.objects.find_by_name("Joao")
+    # REMOVED: queryset = Reporter.objects.find_by_name("Joao") - caused DB error during import
 
-    # Outra implementação do queryset (vai sobrescrever a variavel se os dois existirem)
+    # Implementação do queryset (executado apenas quando a view é chamada)
     def get_queryset(self):
         objetos = Reporter.objects.find_by_name("Joao")
         outros_objetos = Reporter.objects.find_by_name("Pedro")

@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.core.serializers import serialize
 from datetime import datetime
 from django.views import View
-from relacionamentos.models.reporter import Reporter
+from ..models.reporter import Reporter
 
 def primeira_view(request):
     mensagem = "Bom dia Dev I"

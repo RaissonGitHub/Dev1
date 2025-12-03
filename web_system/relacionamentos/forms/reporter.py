@@ -1,5 +1,5 @@
-from relacionamentos.forms import BaseForm
-from relacionamentos.models import Reporter
+from .base_form import BaseForm
+from ..models import Reporter
 
 class ReporterForm(BaseForm):
     class Meta:

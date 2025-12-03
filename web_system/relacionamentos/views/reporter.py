@@ -1,8 +1,8 @@
 import random
 import string
-from relacionamentos.models.reporter import Reporter
+from ..models.reporter import Reporter
 from django.shortcuts import get_object_or_404, render, redirect
-from relacionamentos.forms.reporter import ReporterForm
+from ..forms.reporter import ReporterForm
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import permission_required, login_required
 

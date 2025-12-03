@@ -4,7 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.utils.translation import gettext_lazy as _
 from datetime import date
 from django.core.exceptions import ValidationError
-from relacionamentos.validators.validar_cpf import valida_cpf
+from ..validators.validar_cpf import valida_cpf
 
 
 class Person(Base):

@@ -1,8 +1,8 @@
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, render, redirect
-from relacionamentos.models.reporter import Reporter
-from relacionamentos.forms.reporter import ReporterForm
+from ..models.reporter import Reporter
+from ..forms.reporter import ReporterForm
 import random
 import string
 
