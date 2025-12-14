@@ -1,5 +1,5 @@
 from django.contrib import admin
-from relacionamentos.models import Person, Passport, Reporter, Article, Magazine, Paper, Publication
+from .models import Person, Passport, Reporter, Article, Magazine, Paper, Publication
 
 admin.site.register(Person)
 admin.site.register(Passport)

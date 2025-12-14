@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+ <h1>Atualizar Reporter</h1>
+{% endblock title %}
+
+{% block content %}
+   <form action="{% url "relacionamentos:reporter_update" reporter.id %}" id="reporter" method="post">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3 text-start">
+         {{ field.label_tag }} {{ field }}
+         {% if field.hep_text %}
+            <div class="form-text">{{ field.help_text|safe }}</div>
+         {% endif %}
+         <div class="invalid-feedback">{{ field.erros }}</div>
+      </div>
+    {% endfor %}
+    <div class="mt-2">
+       <button type="submit" class="btn btn-success" form="reporter" value="salvar"><i class="bi bi-floppy"></i> Salvar</button>
+       <button type="reset" form="reporter" class="btn btn-secondary" value="reset"><i class="bi bi-arrow-clockwise"></i> Limpar</button>
+       <a href="{% url "relacionamentos:reporter" %}" class="btn btn-light" role="button"><i class="bi bi-arrow-left"></i> Voltar</a>
+      </div>
+   </form>
+{% endblock content %}

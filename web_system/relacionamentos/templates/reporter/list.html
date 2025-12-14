@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if reporters %}
+    <h1>Lista de Reporters</h1>
+    {% else %}
+    <h1>Nenhum Reporter encontrado</h1>
+    {% endif %}
+    {% endblock title %}
+{% block content %}
+    {% if perms.relacionamentos.add_reporter %}     
+    <a href="{% url "relacionamentos:reporter_create" %}" class="btn btn-primary" role="button" title="Criar com Funções" >
+        <i class="bi bi-plus-square"></i> Criar com Funções
+    </a>
+    {% endif %}
+    {% if perms.relacionamentos.add_reporter %}     
+        <a href="{% url "relacionamentos:reporter_view_create" %}" class="btn btn-info" role="button" title="Criar com Classes">
+            <i class="bi bi-plus-square"></i> Criar com Classes
+        </a>
+
+        {% endif  %}
+    {% if reporters %}   
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Código</th>
+            <th scope="col">Email</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Funções</th>
+            <th scope="col">Classes</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for reporter in reporters %}
+            <tr>
+                <th scope="row">{{ reporter.id }}</th>
+                <td>{{reporter.name}}</td>
+                <td>{{reporter.cod}}</td>
+                <td>{{reporter.email}}</td>
+                <td>{{reporter.cpf}}</td>
+                <td>
+                    <div>
+                        {% if  perms.relacionamentos.view_reporter %} 
+                            <a class="btn btn-outline-primary btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href="{% url 'relacionamentos:reporter_read' reporter.id %}"><i class="bi bi-card-list"></i></a>
+                        {% endif %}
+                        {% if  perms.relacionamentos.change_reporter %} 
+                            <a class="btn btn-outline-success btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar" href="{% url 'relacionamentos:reporter_update' reporter.id %}"><i class="bi  bi-pencil"></i></a>
+                        {% endif %}
+                        {% if  perms.relacionamentos.generate_code_reporter %} 
+                            <a class="btn btn-outline-warning btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar código" href="{% url 'relacionamentos:reporter_generate_code' reporter.id %}"><i class="bi bi-repeat"></i></a>
+                        {% endif %}
+                        {% if  perms.relacionamentos.delete_reporter %} 
+                            <a class="btn btn-outline-danger btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar" href="{% url 'relacionamentos:reporter_delete' reporter.id %}"><i class="bi bi-trash"></i></a>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        {% if  perms.relacionamentos.view_reporter %} 
+                            <a class="btn btn-outline-primary btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Detalhar" href="{% url 'relacionamentos:reporter_view_read' reporter.id %}"><i class="bi bi-card-list"></i></a>                    
+                        {% endif %}
+                        {% if  perms.relacionamentos.change_reporter %}
+                            <a class="btn btn-outline-success btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Atualizar" href="{% url "relacionamentos:reporter_view_update" reporter.id %}"><i class="bi  bi-pencil"></i></a>
+                        {% endif %}
+                        {% if  perms.relacionamentos.generate_code_reporter %}     
+                            <a class="btn btn-outline-warning btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Gerar código" href="{% url "relacionamentos:reporter_view_generate_code" reporter.id %}"><i class="bi bi-repeat"></i></a>
+                        {% endif %}    
+                        {% if  perms.relacionamentos.delete_reporter %} 
+                            <a class="btn btn-outline-danger btn-lg" role="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Deletar" href="{% url "relacionamentos:reporter_view_delete" reporter.id %}"><i class="bi bi-trash"></i></a>
+                        {% endif %}    
+                        </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+
+
+{% endblock content %}
+

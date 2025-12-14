@@ -1,6 +1,6 @@
 from django.db import models
 from .base import Base
-from . import Paper
+from .paper import Paper
 from .magazine import Magazine
 from .person import Person
 

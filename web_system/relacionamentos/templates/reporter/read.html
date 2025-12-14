@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <h1>{{reporter.name}}</h1>
+{% endblock title %}
+{% block content %}
+    <div class="content">
+        <div class="row row-cols-2">
+            <div class="col border border-light-subtle text-start">
+                <strong>ID:</strong>
+                <span>{{reporter.id}}</span>
+            </div>
+            <div class="col border  border-light-subtle text-start">
+                <strong>Código:</strong>
+                <span>{{reporter.cod}}</span>
+            </div>
+       
+            <div class="col border  border-light-subtle text-start">
+                <strong>Nome:</strong>
+                <span>{{reporter.name}}</span>
+            </div>
+            <div class="col border  border-light-subtle text-start">
+                <strong>Email:</strong>
+                <span>{{reporter.email}}</span>
+            </div>
+            <div class="col-12 border  border-light-subtle text-center">
+                <strong>CPF:</strong>
+                <span>{{reporter.cpf}}</span>
+            </div>
+        </div>
+    </div>
+    <a class='btn btn-primary bi-arrow-left mt-3' href="{% url 'relacionamentos:reporter' %}"> Voltar</a>
+{% endblock content %}
+
